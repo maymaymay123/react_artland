@@ -29,7 +29,8 @@ export default function Footer() {
     }
     return (
         <div className="footer">
-            <p>Join our newsletter</p>
+            <hr />
+            <p className="newsletter">Join our newsletter</p>
             <input type="text" placeholder="email" onChange={handleSignUpInput} value={inputText}/>
             <button onClick={signUpSubmit}>sign up</button>
         </div>

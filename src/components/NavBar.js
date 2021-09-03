@@ -11,7 +11,7 @@ export default function NavBar() {
                         <NavLink activeClassName={styles.navbar} to="/home">Home</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName={styles.navbar} to="/inspirations">Insprirations</NavLink>
+                        <NavLink activeClassName={styles.navbar} to="/inspirations">Inspirations</NavLink>
                     </li>
                     <li>
                         <NavLink activeClassName={styles.navbar} to="/contact">Contact</NavLink>

@@ -5,6 +5,8 @@ import Inspirations from "./pages/Inspirations";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer"
 import NavBar from "./components/NavBar"
+import SearchResult from "./components/SearchResult"
+import Highlight from "./components/Highlight"
 
 export default function App() {
   return (
@@ -22,8 +24,13 @@ export default function App() {
       <Route path="/contact">
       <Contact />
       </Route>
+      <Route path="/searchResult">
+      <SearchResult />
+      </Route>
+      <Route path="/highlight">
+      <Highlight />
+      </Route>
       </main>
-      <hr />
       <Footer />
     </div>
   )

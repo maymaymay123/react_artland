@@ -8,7 +8,7 @@ export default function Contact() {
             <br />
             <a href="mailto:artland@art.com">artland@art.com</a>
             <p>+65 9999 9999</p>
-            <p> 123 Main Street Dental Town, USA 99555 </p>
+            <p> 123 Main Street Art Town, USA 99555 </p>
         </div>
     )
 }

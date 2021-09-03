@@ -6,7 +6,7 @@ import Display from '../components/Display'
 export default function Home() {
     return (
         <div>
-            <p>Hello, welcome to my little art land!</p>
+            <h2>Hello, welcome to my little art land!</h2>
             <Form />
             <Filter />
             <Display />

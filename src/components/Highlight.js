@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function Details() {
+export default function Highlight() {
     return (
         <div>
-            <div>Details</div>
+            <div>hi</div>
         </div>
     )
 }
