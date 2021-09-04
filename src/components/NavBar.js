@@ -11,6 +11,9 @@ export default function NavBar() {
                         <NavLink activeClassName={styles.navbar} to="/home">Home</NavLink>
                     </li>
                     <li>
+                    <NavLink activeClassName={styles.navbar} to="/classification">Classification</NavLink>
+                    </li>
+                    <li>
                         <NavLink activeClassName={styles.navbar} to="/inspirations">Inspirations</NavLink>
                     </li>
                     <li>

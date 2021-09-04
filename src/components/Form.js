@@ -37,7 +37,6 @@ export default function Form() {
         
       };
 
-
     return (
         
         <div className="input">
@@ -45,12 +44,11 @@ export default function Form() {
               size= "50"
               type="text" 
               placeholder="search title, name, year, etc" 
-              handleChange={handleChange} 
+              onChange={handleChange} 
 
               >
             </input>
-            <Link to="./SearchResult"><button onClick={handleSubmit} imageUrl={imageUrl} handleSubmit={handleSubmit}>Search</button></Link>
-            
+            <Link to="/searchResult/"><button>Search</button></Link>
         </div>
     )
 }

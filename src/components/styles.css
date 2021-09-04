@@ -1,6 +1,7 @@
 background{
     position: absolute;
     display: inline-block;
+    text-align: center;
 }
 
 .footer {
@@ -25,11 +26,11 @@ background{
  }
 
  .imageContainer{
-     width: 600px;
+     width: 550px;
      height: 300px;
-     position: absolute;
-     left: 250px;
      top: 200px;
+     text-align: center;
+     display: inline;
  }
 
  .filterblock{
@@ -53,10 +54,28 @@ background{
      font-size: 15px;
  }
 
- .image-x{
+ /* .image-x{
      float: left;
  }
 
  .description-x{
-     margin: 50px;
+     margin: 30px;
+ } */
+
+ .container{
+     display: inline;
+     float: left;
+ }
+ .glass:hover{
+    transform: scale(1.5);
+    -ms-transform: scale(1.5); 
+    -webkit-transform: scale(1.5); 
+    transform: scale(1.5); 
+ }
+
+ .highlightimage:hover{
+    transform: scale(1.5);
+    -ms-transform: scale(1.5); 
+    -webkit-transform: scale(1.5); 
+    transform: scale(1.5); 
  }

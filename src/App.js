@@ -1,12 +1,13 @@
 import React from 'react'
-import {Redirect, Route} from "react-router-dom";
+import {Redirect, Switch, Route} from "react-router-dom";
 import Home from "./pages/Home";
+import Classification from "./pages/Classification"
 import Inspirations from "./pages/Inspirations";
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer"
 import NavBar from "./components/NavBar"
 import SearchResult from "./components/SearchResult"
-import Highlight from "./components/Highlight"
+import HighlightItem from './components/HighlightItem';
 
 export default function App() {
   return (
@@ -15,21 +16,26 @@ export default function App() {
 
 
       <main>
-      <Route path="/home">
-      <Home />
-      </Route>
-      <Route path="/inspirations">
-      <Inspirations />
-      </Route>
-      <Route path="/contact">
-      <Contact />
-      </Route>
-      <Route path="/searchResult">
-      <SearchResult />
-      </Route>
-      <Route path="/highlight">
-      <Highlight />
-      </Route>
+          <Switch>
+              <Route exact path="/home">
+              <Home />
+              </Route>
+              <Route exact path="/classification">
+              <Classification />
+              </Route>
+              <Route exact path="/inspirations">
+              <Inspirations />
+              </Route>
+              <Route exact path="/contact">
+              <Contact />
+              </Route>
+              <Route exact path="/searchResult/">
+              <SearchResult />
+              </Route>
+              <Route exact path="/highlight">
+              <HighlightItem />
+              </Route>
+          </Switch>
       </main>
       <Footer />
     </div>
