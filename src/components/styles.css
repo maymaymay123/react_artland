@@ -80,6 +80,9 @@ background{
      display: inline;
      float: left;
  }
+ .glass{
+     float: right;
+ }
  .glass:hover{
     transform: scale(1.5);
     -ms-transform: scale(1.5); 

@@ -54,6 +54,7 @@ export default function DisplayHighight() {
     return (
         <span>
             <h3 style={{color: "red", fontStyle:"italic"}}>Highlights of the Week - Vincent van Gogh</h3>
+            <br />
             <span className="imageHighlightContainer">
                 {displays}
             </span>
