@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import InspirationResult from './InspirationResult'
 
 export default function Inspirations() {
     const [resourceType, setResourceType] = useState("Inventions")
@@ -98,6 +99,7 @@ export default function Inspirations() {
                 <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('Spaces%20and%20Places')}>Spaces and Places</span>
             </div>
                 <span className="imageContainer"> {displays}</span>
+            <InspirationResult />
         </div>
     )
 } 

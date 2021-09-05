@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 
 export default function DisplayHighight() {
-    const [displays, setDisplays] = useState([])
+    const [displays, setDisplays] = useState('Loading...')
     const [imageUrl, setImageUrl] = useState([])
 
     const displayFunction = async (event) => {
@@ -16,9 +16,9 @@ export default function DisplayHighight() {
             //console.log("hijson", json)
             const newArr = json.objectIDs.slice(0,14);
             //const id = (json.objectIDs[Math.floor(Math.random()*json.objectIDs.length)]);
-            let newdisplays = []
-            for (const id of newArr){
-            //await newArr.forEach(async(id) => {
+            //let newdisplays = []
+            //for (const id of newArr){
+            let newdisplays = await Promise.all(newArr.map(async(id) => {
                 const url= ("https://collectionapi.metmuseum.org/public/collection/v1/objects/"+id)
                 //console.log("url",url)
                 const res2 = await fetch(url);
@@ -27,11 +27,12 @@ export default function DisplayHighight() {
                 const key = json2.objectID;
                 // console.log("hiimg", imageUrl);
                 // setImageUrl(json2.primaryImageSmall)
-                newdisplays.push(
+                let newdisplay = (
                     <Link key={key} to={`./highlight/${key}`}><img className="image-xx" src={json2.primaryImageSmall} alt="" width="150px" height="150px"/></Link>
                 )
                 //console.log("key",key)
-            }
+                return newdisplay
+            }))
             console.log('newdisplays: ',newdisplays)
             setDisplays(newdisplays)
             
