@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import ClassificationResult from './ClassificationResult'
 
 export default function Classification() {
     const [resourceType, setResourceType] = useState("1")
@@ -7,6 +8,7 @@ export default function Classification() {
     // const [objectDate, setObjectDate] = useState("");
     // const [imageUrl, setImageUrl] = useState("")
     // const [wiki, setWiki] = useState("")
+    const [resourceButton, setResourceButton] = useState("")
     const [displays, setDisplays] = useState([])
 
 
@@ -77,6 +79,29 @@ export default function Classification() {
             //     imageUrl
             // }
             // console.log("newItem", newItem)
+            setResourceButton(
+                <div className="container-fluid">
+                    <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('1')}>American Decorative Arts</span>
+                    <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('3')}>Ancient Near Eastern Art</span>
+                    <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('4')}>Arms and Armor</span>
+                    <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('5')}>Arts of Africa, Oceania, and the Americas</span>
+                    <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('6')}>Asian Art</span>
+                    <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('7')}>The Cloisters</span>
+                    <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('8')}>The Costume Institute</span>
+                    <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('9')}>Drawings and Prints</span>
+                    <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('10')}>Egyptian Art</span>
+                    <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('11')}>European Paintings</span>
+                    <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('12')}>European Sculpture and Decorative Arts</span>
+                    <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('13')}>Greek and Roman Art</span>
+                    <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('14')}>Islamic Art</span>
+                    <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('15')}>The Robert Lehman Collection</span>
+                    <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('16')}>The Libraries</span>
+                    <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('17')}>Medieval Art</span>
+                    <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('18')}>Musical Instruments</span>
+                    <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('19')}>Photographs</span>
+                    <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('21')}>Modern Art</span>
+            </div>
+            )
             const display = (
                 <span className="container">
                     <br />
@@ -118,28 +143,7 @@ export default function Classification() {
     };  
     return (
         <div>
-            <div className="container-fluid">
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('1')}>American Decorative Arts</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('3')}>Ancient Near Eastern Art</span>
-                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('4')}>Arms and Armor</span>
-                <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('5')}>Arts of Africa, Oceania, and the Americas</span>
-                <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('6')}>Asian Art</span>
-                <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('7')}>The Cloisters</span>
-                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('8')}>The Costume Institute</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('9')}>Drawings and Prints</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('10')}>Egyptian Art</span>
-                <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('11')}>European Paintings</span>
-                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('12')}>European Sculpture and Decorative Arts</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('13')}>Greek and Roman Art</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('14')}>Islamic Art</span>
-                <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('15')}>The Robert Lehman Collection</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('16')}>The Libraries</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('17')}>Medieval Art</span>
-                <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('18')}>Musical Instruments</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('19')}>Photographs</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('21')}>Modern Art</span>
-            </div>
-                <span className="imageContainer"> {displays}</span>
+                <ClassificationResult resourceButton={resourceButton} displays={displays}/>
         </div>
     )
 } 

@@ -8,6 +8,7 @@ export default function Inspirations() {
     // const [objectDate, setObjectDate] = useState("");
     // const [imageUrl, setImageUrl] = useState("")
     // const [wiki, setWiki] = useState("")
+    const [resourceButton, setResourceButton] = useState("");
     const [displays, setDisplays] = useState([])
 
 
@@ -56,17 +57,32 @@ export default function Inspirations() {
             //     imageUrl
             // }
             // console.log("newItem", newItem)
-            const display = (    
-                <div>       
-                    <img className="image-x" src={json2.primaryImageSmall} alt="" width="150px" height="150px"/>        
-                    <h6>Title: {json2.title}</h6>
-                    <hr/>
-                    <h7>Artist: {json2.artistDisplayName}</h7>
+            setResourceButton(
+                <div className="container-fluid">
+                    <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType("Inventions")}>Inventions</span>
+                    <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Creatures')}>Creatures</span>
+                    <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('Mythology')}>Mythology</span>
+                    <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('Battles')}>Battles</span>
+                    <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('Sports%20and%20Games')}>Sports and Games</span>
                     <br />
-                    <h7>Year: {json2.objectDate}</h7>
-                    <br />
-                    <div><a href={`https://www.google.com/search?q=${json2.title}%20${json2.artistDisplayName}`} target="_blank">Find out more...</a></div>
+                    <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('Secrets')}>Secrets</span>
+                    <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('City%20and%20Country')}>City and Country</span>
+                    <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Magic%20and%20Mystery')}>Magic and Mystery</span>
+                    <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('Fashion')}>Fashion</span>
+                    <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('Spaces%20and%20Places')}>Spaces and Places</span>
                 </div>
+            )
+            const display = (   
+                    <div>       
+                        <img className="image-x" src={json2.primaryImageSmall} alt="" width="150px" height="150px"/>        
+                        <h6>Title: {json2.title}</h6>
+                        <hr/>
+                        <h7>Artist: {json2.artistDisplayName}</h7>
+                        <br />
+                        <h7>Year: {json2.objectDate}</h7>
+                        <br />
+                        <div><a href={`https://www.google.com/search?q=${json2.title}%20${json2.artistDisplayName}`} target="_blank">Find out more...</a></div>
+                    </div>
                 )
                 newdisplays.push(display)
                 console.log("displays",displays)
@@ -85,21 +101,7 @@ export default function Inspirations() {
 
     return (
         <div>
-            <div className="container-fluid">
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType("Inventions")}>Inventions</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Creatures')}>Creatures</span>
-                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('Mythology')}>Mythology</span>
-                <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('Battles')}>Battles</span>
-                <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('Sports%20and%20Games')}>Sports and Games</span>
-                <br />
-                <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('Secrets')}>Secrets</span>
-                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('City%20and%20Country')}>City and Country</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Magic%20and%20Mystery')}>Magic and Mystery</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('Fashion')}>Fashion</span>
-                <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('Spaces%20and%20Places')}>Spaces and Places</span>
-            </div>
-                <span className="imageContainer"> {displays}</span>
-            <InspirationResult />
+            <InspirationResult resourceButton={resourceButton} displays={displays}/>
         </div>
     )
 } 
