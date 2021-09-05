@@ -32,9 +32,12 @@ export default function App() {
               <Route exact path="/searchResult/">
               <SearchResult />
               </Route>
-              <Route exact path="/highlight">
+              <Route exact path="/highlight/">
               <HighlightItem />
               </Route>
+              <Route exact path="/highlight/:item">
+              <HighlightItem />
+            </Route>
           </Switch>
       </main>
       <Footer />

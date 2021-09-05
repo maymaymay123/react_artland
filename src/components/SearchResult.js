@@ -19,7 +19,10 @@ export default function SearchResult() {
             const res = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${inputText}`);
             const json = await res.json();
             console.log("hijson", json);
-            const newArr = json.objectIDs.slice(0,3);
+            let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
+            console.log("randomindex", randomindex)
+            const newArr = json.objectIDs.slice(randomindex,randomindex+7);
+            //const newArr = json.objectIDs.slice(0,3);
             console.log("sunflowers", newArr)
             let newdisplays = []
             for (const id of newArr){
@@ -44,8 +47,9 @@ export default function SearchResult() {
                         <img className="image-x" src={json2.primaryImageSmall} alt="" width="150px" height="150px"/>
                         <br />
                         <div className="description-x">
-                            <h7>{json2.title}</h7>
-                            <p>{json2.artistDisplayName}, {json2.objectDate} </p>
+                            <h7>Title: {json2.title}</h7>
+                            <p>Artist: {json2.artistDisplayName}, Year: {json2.objectDate} </p>
+                            <div><a href={`https://www.google.com/search?q=${json2.title}%20${json2.artistDisplayName}`} target="_blank">Find out more...</a></div>
                         </div>
                     </span>
                 )
@@ -59,18 +63,21 @@ export default function SearchResult() {
     
     };  
     return (
-        <div className="input">
-            <h1> Search Result: </h1>
-            <input
-              size= "50"
-              type="text" 
-              placeholder="search title, name, year, etc" 
-              onChange={handleChange} 
-              value={inputText}
-            >
-            </input>
-            <button onClick={handleSubmit}>Search</button>
-            <div>{displays}</div>
+        <div>
+            <div className="input">
+                <h1> Search Result: </h1>
+                <input
+                size= "50"
+                type="text" 
+                placeholder="search title, name, year, etc" 
+                onChange={handleChange} 
+                value={inputText}
+                >
+                </input>
+                <button onClick={handleSubmit}>Search</button>
+            </div>
+            <br />
+            <span className="imageContainer">{displays}</span>
         </div>
     )
 }

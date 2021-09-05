@@ -1,3 +1,7 @@
+body{
+    min-height: 900px;;
+}
+
 background{
     position: absolute;
     display: inline-block;
@@ -11,14 +15,17 @@ background{
     width: 100%;
     color: black;
     text-align: center;
+    margin-top: 100px;
  }
 
  .newsletter{
      margin-bottom: 0px;
+     margin-top: -20px;
  }
 
- h2 {
+ h1 {
      text-align: center;
+
  }
 
  .input{
@@ -27,17 +34,18 @@ background{
 
  .imageContainer{
      width: 550px;
-     height: 300px;
-     top: 200px;
+     height: 400px;
+     top: 20px;
      text-align: center;
-     display: inline;
+     display: inline-flex;
+     font-size: 14px;
  }
-
- .filterblock{
-     position: absolute;
-     top: 200px;
-     background-color: lightgoldenrodyellow;
-     padding: 100px 30px;
+ .imageHighlightContainer{
+    width: 1050px;
+    height: 400px;
+    top: 20px;
+    text-align: center;
+    display:inline-block;
  }
 
  h3{
@@ -45,22 +53,28 @@ background{
  }
 
  .container-fluid{
-     margin: 5px 5px;
+     margin: 3px 3px;
      text-align: center;
  }
 
  .btn {
      margin: 2px;
-     font-size: 15px;
+     font-size: 12px;
  }
 
- /* .image-x{
+ .image-xx{
      float: left;
  }
 
+ .image-xx:hover{
+    transform: scale(1.2);
+    -ms-transform: scale(1.2); 
+    -webkit-transform: scale(1.2); 
+    transform: scale(1.2); 
+ }
  .description-x{
      margin: 30px;
- } */
+ }
 
  .container{
      display: inline;

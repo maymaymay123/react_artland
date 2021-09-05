@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react'
 
 export default function Inspirations() {
     const [resourceType, setResourceType] = useState("Inventions")
-    const [title, setTitle] = useState("")
-    const [artistDisplayName, setArtistDisplayName] = useState("")
-    const [objectDate, setObjectDate] = useState("");
-    const [imageUrl, setImageUrl] = useState("")
-    const [wiki, setWiki] = useState("")
+    // const [title, setTitle] = useState("")
+    // const [artistDisplayName, setArtistDisplayName] = useState("")
+    // const [objectDate, setObjectDate] = useState("");
+    // const [imageUrl, setImageUrl] = useState("")
+    // const [wiki, setWiki] = useState("")
+    const [displays, setDisplays] = useState([])
 
 
     // useEffect(()=>{
@@ -20,27 +21,33 @@ export default function Inspirations() {
     },[resourceType])
 
     // console.log("items",items) 
-    let inspiration ="";
+    // let inspiration ="";
     const handleAPiInspiration = async (event) => {
 
         try{
             const res = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${resourceType}`);
             const json = await res.json();
             console.log("hijson", json)
-            const id = (json.objectIDs[Math.floor(Math.random()*json.objectIDs.length)]);
-            console.log("id",id)
-            const url= ("https://collectionapi.metmuseum.org/public/collection/v1/objects/"+id)
-            console.log("url",url)
-            const res2 = await fetch(url);
-            const json2 = await res2.json();
-            console.log("json2",json2)
-            console.log("hiimg", imageUrl);
-            console.log("hititle",title)
-            setTitle(json2.title)
-            setArtistDisplayName(json2.artistDisplayName)
-            setObjectDate(json2.objectDate)
-            setImageUrl(json2.primaryImageSmall)
-            setWiki(`https://en.wikipedia.org/wiki/${json2.title}`)
+            let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
+            console.log("randomindex", randomindex)
+            const newArr = json.objectIDs.slice(randomindex,randomindex+7);
+            //const newArr = json.objectIDs.slice(0,3);
+            // const id = (json.objectIDs[Math.floor(Math.random()*objectIDs.length)]);
+            // console.log("id",id)
+            let newdisplays = []
+            for (const id of newArr){
+                const url= ("https://collectionapi.metmuseum.org/public/collection/v1/objects/"+id)
+                console.log("url",url)
+                const res2 = await fetch(url);
+                const json2 = await res2.json();
+                // console.log("json2",json2)
+                // console.log("hiimg", imageUrl);
+                // console.log("hititle",title)
+            // setTitle(json2.title)
+            // setArtistDisplayName(json2.artistDisplayName)
+            // setObjectDate(json2.objectDate)
+            // setImageUrl(json2.primaryImageSmall)
+            // setWiki(`https://en.wikipedia.org/wiki/${json2.title}`)
             // const newItem={
             //     title,
             //     artistDisplayName,
@@ -48,29 +55,35 @@ export default function Inspirations() {
             //     imageUrl
             // }
             // console.log("newItem", newItem)
-            inspiration = (    
+            const display = (    
                 <div>       
-                    <img className="image-x" src={imageUrl} alt="" width="300px" height="300px"/>        
-                    <h6>Title: {title}</h6>
+                    <img className="image-x" src={json2.primaryImageSmall} alt="" width="150px" height="150px"/>        
+                    <h6>Title: {json2.title}</h6>
                     <hr/>
-                    <h7>Artist: {artistDisplayName}</h7>
+                    <h7>Artist: {json2.artistDisplayName}</h7>
                     <br />
-                    <h7>Year: {objectDate}</h7>
+                    <h7>Year: {json2.objectDate}</h7>
                     <br />
-                    <div><a href={wiki}>Find out more...</a></div>
+                    <div><a href={`https://www.google.com/search?q=${json2.title}%20${json2.artistDisplayName}`} target="_blank">Find out more...</a></div>
                 </div>
                 )
-            return inspiration;
+                newdisplays.push(display)
+                console.log("displays",displays)
+            }
+                setDisplays(newdisplays)
+            // return title,artistDisplayName,objectDate,imageUrl,inspiration;
+
 
         } catch (err) {
             console.error(err.message);
         }
 
 
-};  
+    };  
 
 
-        return (
+    return (
+        <div>
             <div className="container-fluid">
                 <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType("Inventions")}>Inventions</span>
                 <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Creatures')}>Creatures</span>
@@ -83,11 +96,10 @@ export default function Inspirations() {
                 <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Magic%20and%20Mystery')}>Magic and Mystery</span>
                 <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('Fashion')}>Fashion</span>
                 <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('Spaces%20and%20Places')}>Spaces and Places</span>
-                <div className="description-x"> 
-                {inspiration}
-                </div>
             </div>
-        )
+                <span className="imageContainer"> {displays}</span>
+        </div>
+    )
 } 
- 
+
 // return title,artistDisplayName,objectDate,imageUrl;

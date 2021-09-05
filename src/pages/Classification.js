@@ -1,49 +1,75 @@
 import React, {useState, useEffect} from 'react'
 
 export default function Classification() {
-    const [resourceType, setResourceType] = useState("American%20Decorative%20Arts")
-    const [title, setTitle] = useState("")
-    const [artistDisplayName, setArtistDisplayName] = useState("")
-    const [objectDate, setObjectDate] = useState("");
-    const [imageUrl, setImageUrl] = useState("")
-    const [wiki, setWiki] = useState("")
+    const [resourceType, setResourceType] = useState("1")
+    // const [title, setTitle] = useState("")
+    // const [artistDisplayName, setArtistDisplayName] = useState("")
+    // const [objectDate, setObjectDate] = useState("");
+    // const [imageUrl, setImageUrl] = useState("")
+    // const [wiki, setWiki] = useState("")
+    const [displays, setDisplays] = useState([])
+
+
     useEffect(()=>{
         handleClassification()
     },[resourceType])
-    let map_diplayName2departmentId = {}
+    // let map_diplayName2departmentId = {}
     // console.log("items",items) 
-    useEffect(async ()=>{
-        let bla = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/departments')
-        let deps = (await bla.json())['departments']
-        for(let item of deps){
-            map_diplayName2departmentId[item.displayName] = item.departmentId
-        }
-    },[])
-    console.log('map_diplayName2departmentId',map_diplayName2departmentId)
-    let classification ="";
+
+    // useEffect(()=>{
+    //     getDepartment()
+    // },[])
+
+    // const getDepartment = async(event) =>{
+    //     let bla = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/departments')
+    //     let deps = (await bla.json())['departments']
+    //     //console.log("deps", deps)
+    //     for(let item of deps){
+    //         let departmentName = item.displayName
+    //         console.log("departmentName", departmentName)
+    //     //     console.log("item", item)
+    //     // map_diplayName2departmentId[item.displayName] = item.departmentId
+    //     }
+    //     // console.log('map_diplayName2departmentId',map_diplayName2departmentId)
+    // }
+
+    // useEffect(async ()=>{
+    //     let bla = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/departments')
+    //     let deps = (await bla.json())['departments']
+    //     for(let item of deps){
+    //         map_diplayName2departmentId[item.displayName] = item.departmentId
+    //     }
+    // },[])
+    // console.log('map_diplayName2departmentId',map_diplayName2departmentId)
     const handleClassification = async (event) => {
-        let department_name = 'Islamic Art'
-        let depid = map_diplayName2departmentId[department_name]
-        console.log('depid',depid)
+        // const depId = map_diplayName2departmentId["displayName"]
+        // let department_name = 'Islamic Art';
+        // let depid = map_diplayName2departmentId[department_name]
+        // console.log('depId',depId)
         try{
-            const res = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=""&hasImages=true&departmentId=${depid}`);
-            // https://collectionapi.metmuseum.org/public/collection/v1/departments
+            const res = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?&hasImages=true&departmentId=${resourceType}&q=%22%22`);
+            // https://collectionapi.metmuseum.org/public/collection/v1/search?&hasImages=true&departmentId=6&q=%22%22
             const json = await res.json();
             console.log("hijson", json)
-            const id = (json.objectIDs[Math.floor(Math.random()*json.objectIDs.length)]);
-            console.log("id",id)
-            const url= ("https://collectionapi.metmuseum.org/public/collection/v1/objects/"+id)
-            console.log("url",url)
-            const res2 = await fetch(url);
-            const json2 = await res2.json();
-            console.log("json2",json2)
-            console.log("hiimg", imageUrl);
-            console.log("hititle",title)
-            setTitle(json2.title)
-            setArtistDisplayName(json2.artistDisplayName)
-            setObjectDate(json2.objectDate)
-            setImageUrl(json2.primaryImageSmall)
-            setWiki(`https://en.wikipedia.org/wiki/${json2.title}`)
+            let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
+            console.log("randomindex", randomindex)
+            const newArr = json.objectIDs.slice(randomindex,randomindex+7);
+            // const id = (json.objectIDs[Math.floor(Math.random()*json.objectIDs.length)]);
+            // console.log("id",id)
+            let newdisplays = []
+            for (const id of newArr){
+                const url= ("https://collectionapi.metmuseum.org/public/collection/v1/objects/"+id)
+                console.log("url",url)
+                const res2 = await fetch(url);
+                const json2 = await res2.json();
+                console.log("json2",json2)
+            // console.log("hiimg", imageUrl);
+            // console.log("hititle",title)
+            // setTitle(json2.title)
+            // setArtistDisplayName(json2.artistDisplayName)
+            // setObjectDate(json2.objectDate)
+            // setImageUrl(json2.primaryImageSmall)
+            // setWiki(`https://en.wikipedia.org/wiki/${json2.title}`)
             // const newItem={
             //     title,
             //     artistDisplayName,
@@ -51,50 +77,69 @@ export default function Classification() {
             //     imageUrl
             // }
             // console.log("newItem", newItem)
-            classification = (    
-                <div>       
-                    <img className="image-x" src={imageUrl} alt="" width="300px" height="300px"/>        
-                    <h6>Title: {title}</h6>
-                    <hr/>
-                    <h7>Artist: {artistDisplayName}</h7>
+            const display = (
+                <span className="container">
                     <br />
-                    <h7>Year: {objectDate}</h7>
+                    <img className="image-x" src={json2.primaryImageSmall} alt="" width="150px" height="150px"/>
                     <br />
-                    <div><a href={wiki}>Find out more...</a></div>
-                </div>
-                )
-            return classification;
+                    <div className="description-x">
+                        <h7>Title: {json2.title}</h7>
+                        <p>Artist: {json2.artistDisplayName}</p>
+                        <p>Year: {json2.objectDate} </p>
+                        <div><a href={`https://www.google.com/search?q=${json2.title}%20${json2.artistDisplayName}`} target="_blank">Find out more...</a></div>
+                    </div>
+                </span>
+            )
+            newdisplays.push(display)
+            console.log("displays",displays)
+        }
+            setDisplays(newdisplays)
+            // let oneItem = (  
+            //     <div>       
+            //         <img className="image-x" src={imageUrl} alt="" width="300px" height="300px"/>        
+            //         <h6>Title: {title}</h6>
+            //         <hr/>
+            //         <h7>Artist: {artistDisplayName}</h7>
+            //         <br />
+            //         <h7>Year: {objectDate}</h7>
+            //         <br />
+            //         <div><a href={wiki}>Find out more...</a></div>
+            //     </div>
+            // )
+            // classification.push(oneItem)
+            // console.log("classification",oneItem)
+            // return classification;
 
         } catch (err) {
             console.error(err.message);
         }
 
 
-};  
+    };  
     return (
-        <div className="container-fluid">
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType("American%20Decorative%20Artss")}>American Decorative Arts</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Ancient%20Near%20Eastern%20Art')}>Ancient Near Eastern Art</span>
-                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('Arms%20and%20Armor')}>Arms and Armor</span>
-                <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('Arts%20of%20Africa,%20Oceania,%20and%20the%20Americas')}>Arts of Africa, Oceania, and the Americas</span>
-                <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('Asian%Art')}>Asian Art</span>
-                <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('The%20Cloisters')}>The Cloisters</span>
-                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('The%20Costume%20Institute')}>The Costume Institute</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Drawings%20and%20Prints')}>Drawings and Prints</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('Egyptian%20Art')}>Egyptian Art</span>
-                <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('European%20Paintings')}>European Paintings</span>
-                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('European%20Sculpture%20and%20Decorative%20Arts')}>European Sculpture and Decorative Arts</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Greek%20and%20Roman%20Art')}>Greek and Roman Art</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('Islamic%20Art')}>Islamic Art</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('The%20Robert%20Lehman%20Collection')}>The Robert Lehman Collection</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('The%20Libraries')}>The Libraries</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Medieval%20Art')}>Medieval Art</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('Musical%20Instruments')}>Musical Instruments</span>
-                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('Photographs')}>Photographs</span>
-                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('Modern%20Art')}>Modern Art</span>
-                <div className="description-x"> 
-                {classification}
-                </div>
+        <div>
+            <div className="container-fluid">
+                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('1')}>American Decorative Arts</span>
+                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('3')}>Ancient Near Eastern Art</span>
+                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('4')}>Arms and Armor</span>
+                <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('5')}>Arts of Africa, Oceania, and the Americas</span>
+                <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('6')}>Asian Art</span>
+                <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('7')}>The Cloisters</span>
+                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('8')}>The Costume Institute</span>
+                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('9')}>Drawings and Prints</span>
+                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('10')}>Egyptian Art</span>
+                <span className="btn btn-dark" stype={{cursor:'pointer'}} onClick={()=> setResourceType('11')}>European Paintings</span>
+                <span className="btn btn-warning" style={{cursor:'pointer'}} onClick={()=> setResourceType('12')}>European Sculpture and Decorative Arts</span>
+                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('13')}>Greek and Roman Art</span>
+                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('14')}>Islamic Art</span>
+                <span className="btn btn-danger" style={{cursor:'pointer'}} onClick={()=> setResourceType('15')}>The Robert Lehman Collection</span>
+                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('16')}>The Libraries</span>
+                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('17')}>Medieval Art</span>
+                <span className="btn btn-secondary" style={{cursor:'pointer'}} onClick={()=> setResourceType('18')}>Musical Instruments</span>
+                <span className="btn btn-success" style={{cursor:'pointer'}} onClick={()=> setResourceType('19')}>Photographs</span>
+                <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('21')}>Modern Art</span>
+            </div>
+                <span className="imageContainer"> {displays}</span>
         </div>
     )
 } 
