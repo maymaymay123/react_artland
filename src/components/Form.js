@@ -8,7 +8,7 @@ export default function Form() {
     const [inputText, setInputText] = useState("")
     const [imageUrl, setImageUrl] = useState("")
     function handleChange (event) {
-        console.log("event", event.target.value)
+        //console.log("event", event.target.value)
         setInputText(event.target.value)
 
     }
@@ -20,9 +20,9 @@ export default function Form() {
         
           );
           const json = await res.json();
-          console.log("hijson", json);
+          //console.log("hijson", json);
           const id = (json.objectIDs[Math.floor(Math.random()*json.objectIDs.length)]);
-          console.log("hiid", id)
+          //console.log("hiid", id)
           const url= ("https://collectionapi.metmuseum.org/public/collection/v1/objects/"+id)
           const res2 = await fetch(url
             );

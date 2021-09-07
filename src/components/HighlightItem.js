@@ -5,11 +5,11 @@ import { useParams } from "react-router-dom";
 export default function HighlightItem() {
 
     const params = useParams();
-    const [imageUrl, setImageUrl] = useState("")
-    const [title, setTitle] = useState("")
-    const [artistDisplayName, setArtistDisplayName] = useState("")
-    const [objectDate, setObjectDate] = useState("");
-    const [wiki, setWiki] = useState("")
+    // const [imageUrl, setImageUrl] = useState("")
+    // const [title, setTitle] = useState("")
+    // const [artistDisplayName, setArtistDisplayName] = useState("")
+    // const [objectDate, setObjectDate] = useState("");
+    // const [wiki, setWiki] = useState("")
     const [display,setDisplay] = useState("")
 
     const displayHighlightItem = async (event) => {
@@ -19,7 +19,7 @@ export default function HighlightItem() {
             `https://collectionapi.metmuseum.org/public/collection/v1/objects/${params.item}`
             );
             const json = await res.json();
-            console.log("json",json)
+            //console.log("json",json)
             // setImageUrl(json.primaryImageSmall)
             // setTitle(json.title)
             // setArtistDisplayName(json.artistDisplayName)

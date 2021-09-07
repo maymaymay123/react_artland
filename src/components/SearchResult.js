@@ -13,7 +13,7 @@ export default function SearchResult() {
         handleSubmit()
     },[])
 
-
+    let newdisplays = []
     const handleSubmit = async (event) => {
         try{
             const res = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${inputText}`);
@@ -24,7 +24,6 @@ export default function SearchResult() {
             const newArr = json.objectIDs.slice(randomindex,randomindex+7);
             //const newArr = json.objectIDs.slice(0,3);
             console.log("sunflowers", newArr)
-            let newdisplays = []
             for (const id of newArr){
                 // const id = (json.objectIDs[Math.floor(Math.random()*json.objectIDs.length)]);
                 // console.log("id",id)
@@ -53,12 +52,20 @@ export default function SearchResult() {
                         </div>
                     </span>
                 )
+            
                 newdisplays.push(display)
                 console.log("displays",displays)
             }
             setDisplays(newdisplays)
         } catch (err) {
-            console.error(err.message)
+            console.log("error doing handlesubmit: ",err.message)
+            const display = (
+                <span className="container">
+                    0 Result(s).
+                </span>
+            )
+            newdisplays.push(display)
+            setDisplays(newdisplays)
         }
     
     };  

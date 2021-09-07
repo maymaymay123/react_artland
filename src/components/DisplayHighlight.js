@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 export default function DisplayHighight() {
     const [displays, setDisplays] = useState('Loading...')
-    const [imageUrl, setImageUrl] = useState([])
+    // const [imageUrl, setImageUrl] = useState([])
 
     const displayFunction = async (event) => {
         try {
