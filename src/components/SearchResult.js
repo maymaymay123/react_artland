@@ -21,7 +21,11 @@ export default function SearchResult() {
             console.log("hijson", json);
             let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
             console.log("randomindex", randomindex)
-            const newArr = json.objectIDs.slice(randomindex,randomindex+7);
+            function shuffle(array) {
+                array.sort(() => Math.random() - 0.5);
+              }
+            let newArr = shuffle(json.objectIDs)
+            newArr = json.objectIDs.slice(randomindex,randomindex+7);
             //const newArr = json.objectIDs.slice(0,3);
             console.log("sunflowers", newArr)
             for (const id of newArr){

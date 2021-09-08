@@ -32,7 +32,11 @@ export default function Inspirations() {
             console.log("hijson", json)
             let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
             console.log("randomindex", randomindex)
-            const newArr = json.objectIDs.slice(randomindex,randomindex+7);
+            function shuffle(array) {
+                array.sort(() => Math.random() - 0.5);
+              }
+            let newArr = shuffle(json.objectIDs)
+            newArr = json.objectIDs.slice(randomindex,randomindex+7);
             //const newArr = json.objectIDs.slice(0,3);
             // const id = (json.objectIDs[Math.floor(Math.random()*objectIDs.length)]);
             // console.log("id",id)
