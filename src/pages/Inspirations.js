@@ -9,7 +9,7 @@ export default function Inspirations() {
     // const [imageUrl, setImageUrl] = useState("")
     // const [wiki, setWiki] = useState("")
     const [resourceButton, setResourceButton] = useState("");
-    const [displays, setDisplays] = useState([])
+    const [displays, setDisplays] = useState("Loading...")
 
 
     // useEffect(()=>{
