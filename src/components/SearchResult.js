@@ -19,13 +19,14 @@ export default function SearchResult() {
             const res = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=${inputText}`);
             const json = await res.json();
             console.log("hijson", json);
-            let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
-            console.log("randomindex", randomindex)
+            // let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
+            // console.log("randomindex", randomindex)
             function shuffle(array) {
                 array.sort(() => Math.random() - 0.5);
               }
-            let newArr = shuffle(json.objectIDs)
-            newArr = json.objectIDs.slice(randomindex,randomindex+7);
+            let newArr = json.objectIDs
+            shuffle(newArr)
+            newArr = newArr.slice(0,7);
             //const newArr = json.objectIDs.slice(0,3);
             console.log("sunflowers", newArr)
             for (const id of newArr){

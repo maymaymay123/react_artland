@@ -53,13 +53,14 @@ export default function Classification() {
             // https://collectionapi.metmuseum.org/public/collection/v1/search?&hasImages=true&departmentId=6&q=%22%22
             const json = await res.json();
             console.log("hijson", json)
-            let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
-            console.log("randomindex", randomindex)
+            // let randomindex = Math.floor(Math.random()*(json.objectIDs.length-7))
+            // console.log("randomindex", randomindex)
             function shuffle(array) {
                 array.sort(() => Math.random() - 0.5);
               }
-            let newArr = shuffle(json.objectIDs)
-            newArr = json.objectIDs.slice(randomindex,randomindex+7);
+            let newArr = json.objectIDs
+            shuffle(newArr)
+            newArr = newArr.slice(0,7);
             // const id = (json.objectIDs[Math.floor(Math.random()*json.objectIDs.length)]);
             // console.log("id",id)
             let newdisplays = []
