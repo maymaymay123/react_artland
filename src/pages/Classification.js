@@ -3,11 +3,6 @@ import ClassificationResult from './ClassificationResult'
 
 export default function Classification() {
     const [resourceType, setResourceType] = useState("1")
-    // const [title, setTitle] = useState("")
-    // const [artistDisplayName, setArtistDisplayName] = useState("")
-    // const [objectDate, setObjectDate] = useState("");
-    // const [imageUrl, setImageUrl] = useState("")
-    // const [wiki, setWiki] = useState("")
     const [resourceButton, setResourceButton] = useState("")
     const [displays, setDisplays] = useState("Loading...")
 
@@ -15,34 +10,6 @@ export default function Classification() {
     useEffect(()=>{
         handleClassification()
     },[resourceType])
-    // let map_diplayName2departmentId = {}
-    // console.log("items",items) 
-
-    // useEffect(()=>{
-    //     getDepartment()
-    // },[])
-
-    // const getDepartment = async(event) =>{
-    //     let bla = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/departments')
-    //     let deps = (await bla.json())['departments']
-    //     //console.log("deps", deps)
-    //     for(let item of deps){
-    //         let departmentName = item.displayName
-    //         console.log("departmentName", departmentName)
-    //     //     console.log("item", item)
-    //     // map_diplayName2departmentId[item.displayName] = item.departmentId
-    //     }
-    //     // console.log('map_diplayName2departmentId',map_diplayName2departmentId)
-    // }
-
-    // useEffect(async ()=>{
-    //     let bla = await fetch('https://collectionapi.metmuseum.org/public/collection/v1/departments')
-    //     let deps = (await bla.json())['departments']
-    //     for(let item of deps){
-    //         map_diplayName2departmentId[item.displayName] = item.departmentId
-    //     }
-    // },[])
-    // console.log('map_diplayName2departmentId',map_diplayName2departmentId)
     const handleClassification = async (event) => {
         // const depId = map_diplayName2departmentId["displayName"]
         // let department_name = 'Islamic Art';
@@ -70,20 +37,6 @@ export default function Classification() {
                 const res2 = await fetch(url);
                 const json2 = await res2.json();
                 console.log("json2",json2)
-            // console.log("hiimg", imageUrl);
-            // console.log("hititle",title)
-            // setTitle(json2.title)
-            // setArtistDisplayName(json2.artistDisplayName)
-            // setObjectDate(json2.objectDate)
-            // setImageUrl(json2.primaryImageSmall)
-            // setWiki(`https://en.wikipedia.org/wiki/${json2.title}`)
-            // const newItem={
-            //     title,
-            //     artistDisplayName,
-            //     objectDate,
-            //     imageUrl
-            // }
-            // console.log("newItem", newItem)
             setResourceButton(
                 <div className="container-fluid">
                     <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType('1')}>American Decorative Arts</span>
@@ -124,21 +77,6 @@ export default function Classification() {
             console.log("displays",displays)
         }
             setDisplays(newdisplays)
-            // let oneItem = (  
-            //     <div>       
-            //         <img className="image-x" src={imageUrl} alt="" width="300px" height="300px"/>        
-            //         <h6>Title: {title}</h6>
-            //         <hr/>
-            //         <h7>Artist: {artistDisplayName}</h7>
-            //         <br />
-            //         <h7>Year: {objectDate}</h7>
-            //         <br />
-            //         <div><a href={wiki}>Find out more...</a></div>
-            //     </div>
-            // )
-            // classification.push(oneItem)
-            // console.log("classification",oneItem)
-            // return classification;
 
         } catch (err) {
             console.error(err.message);

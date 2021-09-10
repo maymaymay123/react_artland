@@ -50,18 +50,6 @@ export default function Inspirations() {
                 // console.log("json2",json2)
                 // console.log("hiimg", imageUrl);
                 // console.log("hititle",title)
-            // setTitle(json2.title)
-            // setArtistDisplayName(json2.artistDisplayName)
-            // setObjectDate(json2.objectDate)
-            // setImageUrl(json2.primaryImageSmall)
-            // setWiki(`https://en.wikipedia.org/wiki/${json2.title}`)
-            // const newItem={
-            //     title,
-            //     artistDisplayName,
-            //     objectDate,
-            //     imageUrl
-            // }
-            // console.log("newItem", newItem)
             setResourceButton(
                 <div className="container-fluid">
                     <span className="btn btn-info" style={{cursor:'pointer'}} onClick={()=> setResourceType("Inventions")}>Inventions</span>

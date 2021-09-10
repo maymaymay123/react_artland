@@ -37,13 +37,6 @@ export default function SearchResult() {
                 const res2 = await fetch(url);
                 const json2 = await res2.json();
                 console.log("json2",json2)
-                // console.log("hiimg", imageUrl);
-                // console.log("hititle",title)
-                // setTitle(json2.title)
-                // setArtistDisplayName(json2.artistDisplayName)
-                // setObjectDate(json2.objectDate)
-                // setImageUrl(json2.primaryImageSmall)
-                // setWiki(`https://en.wikipedia.org/wiki/${json2.title}`)
                 setInputText("")
                 const display = (
                     <span className="container">
